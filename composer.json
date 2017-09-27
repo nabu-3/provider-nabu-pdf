@@ -1,0 +1,34 @@
+{
+    "name": "nabu-3/provider-nabu-pdf",
+    "description": "nabu-3 provider to create PDF files on demand",
+    "version": "0.0.1",
+    "type": "nabu-provider",
+    "keywords": [ "nabu-3", "nabu", "pdf", "provider" ],
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "Rafael Gutierrez",
+            "email": "ragutimar@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/nabu-3/provider-nabu-pdf/issues"
+    },
+    "config": {
+        "bin-dir": "bin",
+        "vendor-dir": "lib"
+    },
+    "require": {
+        "nabu-3/composer-installer-plugin": ">=3.0"
+    },
+    "require-dev": {
+        "nabu-3/composer-installer-plugin": "dev-master"
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/nabu-3/provider-nabu-pdf"
+        }
+    ]
+}
