@@ -23,6 +23,7 @@ use nabu\core\interfaces\INabuApplication;
 use nabu\http\app\base\CNabuHTTPApplication;
 use nabu\http\managers\CNabuHTTPRenderDescriptor;
 use nabu\provider\base\CNabuProviderModuleManagerAdapter;
+use nabu\render\adapters\CNabuRenderModuleManagerAdapter;
 use nabu\render\descriptors\CNabuRenderInterfaceDescriptor;
 
  /**
@@ -31,7 +32,7 @@ use nabu\render\descriptors\CNabuRenderInterfaceDescriptor;
   * @version 0.0.1
   * @package \providers\nabu\pdf
   */
-class CNabuPDFProviderManager extends CNabuProviderModuleManagerAdapter
+class CNabuPDFProviderManager extends CNabuRenderModuleManagerAdapter
 {
     /** @var CNabuRenderInterfaceDescriptor PDF Render descriptor. */
     private $nb_pdf_render_descriptor = null;
@@ -52,8 +53,9 @@ class CNabuPDFProviderManager extends CNabuProviderModuleManagerAdapter
             $this,
             'NabuPDFRender',
             'Nabu PDF Render',
-            __NAMESPACE__ . '\renders',
-            'CNabuPDFRenderInterface'
+            __NAMESPACE__,
+            'CNabuPDFRenderInterface',
+            'application/pdf'
         );
 
         $nb_engine->registerProviderInterface($this->nb_pdf_render_descriptor);
@@ -63,7 +65,6 @@ class CNabuPDFProviderManager extends CNabuProviderModuleManagerAdapter
 
     public function registerApplication(INabuApplication $nb_application)
     {
-        error_log("HOLA");
         if ($nb_application instanceof CNabuHTTPApplication) {
             $this->nb_application = $nb_application;
             $this->nb_application->registerRender(
