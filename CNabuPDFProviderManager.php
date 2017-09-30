@@ -22,7 +22,6 @@ use nabu\core\CNabuEngine;
 use nabu\core\interfaces\INabuApplication;
 use nabu\http\app\base\CNabuHTTPApplication;
 use nabu\http\managers\CNabuHTTPRenderDescriptor;
-use nabu\provider\base\CNabuProviderModuleManagerAdapter;
 use nabu\render\adapters\CNabuRenderModuleManagerAdapter;
 use nabu\render\descriptors\CNabuRenderInterfaceDescriptor;
 
