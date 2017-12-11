@@ -25,6 +25,7 @@ use nabu\http\app\base\CNabuHTTPApplication;
 use nabu\http\managers\CNabuHTTPRenderDescriptor;
 use nabu\render\adapters\CNabuRenderModuleManagerAdapter;
 use nabu\render\descriptors\CNabuRenderInterfaceDescriptor;
+use nabu\render\descriptors\CNabuRenderTransformInterfaceDescriptor;
 
  /**
   * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
@@ -36,6 +37,8 @@ class CNabuPDFProviderManager extends CNabuRenderModuleManagerAdapter
 {
     /** @var CNabuRenderInterfaceDescriptor PDF Render descriptor. */
     private $nb_pdf_render_descriptor = null;
+    /** @var CNabuRenderTransformInterfaceDescriptor HTML to PDF Render Transform descriptor. */
+    private $nb_pdf_render_transform_descriptor = null;
 
     /**
      * Default constructor.
@@ -57,8 +60,17 @@ class CNabuPDFProviderManager extends CNabuRenderModuleManagerAdapter
             'CNabuPDFRenderInterface',
             'application/pdf'
         );
-
         $nb_engine->registerProviderInterface($this->nb_pdf_render_descriptor);
+
+        $this->nb_pdf_render_transform_descriptor = new CNabuRenderTransformInterfaceDescriptor(
+            $this,
+            'NabuPDFRenderTransform',
+            'nabu-3 Transform HTML to PDF',
+            __NAMESPACE__,
+            'CNabuPDFRenderTransformInterface',
+            'application/pdf'
+        );
+        $nb_engine->registerProviderInterface($this->nb_pdf_render_transform_descriptor);
 
         return true;
     }
