@@ -31,5 +31,6 @@ define ('NABU_PDF_VENDOR_KEY', 'nabu');
 define ('NABU_PDF_MODULE_KEY', 'pdf');
 define ('NABU_PDF_MANAGER_KEY', 'CNabuPDFProviderManager');
 define ('NABU_PDF_PROVIDER_PATH', dirname(__FILE__));
+define ('NABU_PDF_FOLDER', DIRECTORY_SEPARATOR . 'pdf');
 
 $nb_engine->registerProviderManager(new CNabuPDFProviderManager());

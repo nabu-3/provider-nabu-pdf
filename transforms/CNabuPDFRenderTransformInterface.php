@@ -19,6 +19,9 @@
  */
 
 namespace providers\nabu\pdf\transforms;
+
+use nabu\core\CNabuEngine;
+
 use nabu\data\lang\CNabuLanguage;
 use nabu\render\adapters\CNabuRenderTransformInterfaceAdapter;
 
@@ -37,6 +40,11 @@ class CNabuPDFRenderTransformInterface extends CNabuRenderTransformInterfaceAdap
 {
     public function transform($source)
     {
+        $nb_engine = CNabuEngine::getEngine();
+        $nb_application = $nb_engine->getApplication();
+        $base_path = $nb_application->getBasePath();
+        error_log($base_path);
+
         $iso_6391 = $this->nb_language instanceof CNabuLanguage ? $this->nb_language->getISO6391() : 'en';
 
         try {
@@ -45,7 +53,7 @@ class CNabuPDFRenderTransformInterface extends CNabuRenderTransformInterfaceAdap
             $html2pdf->pdf->SetDisplayMode('fullpage');
 
             $pushd = getcwd();
-            chdir('/var/opt/nabu-3/vhosts/dealer.tirexpert-michelin.com/pub/pdf');
+            chdir($base_path . DIRECTORY_SEPARATOR . NABU_PUB_FOLDER . DIRECTORY_SEPARATOR . NABU_PDF_FOLDER);
             $html2pdf->writeHTML($source);
             $html2pdf->output('exemple03.pdf');
             chdir($pushd);
