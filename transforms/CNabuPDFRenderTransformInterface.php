@@ -43,7 +43,6 @@ class CNabuPDFRenderTransformInterface extends CNabuRenderTransformInterfaceAdap
         $nb_engine = CNabuEngine::getEngine();
         $nb_application = $nb_engine->getApplication();
         $base_path = $nb_application->getBasePath();
-        error_log($base_path);
 
         $iso_6391 = $this->nb_language instanceof CNabuLanguage ? $this->nb_language->getISO6391() : 'en';
 
