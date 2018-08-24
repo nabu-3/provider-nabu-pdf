@@ -19,8 +19,14 @@
  */
 
 namespace providers\nabu\pdf\renders;
-use nabu\core\CNabuObject;
-use nabu\provider\interfaces\INabuProviderInterface;
+
+use nabu\render\CNabuRenderFactory;
+
+use nabu\render\adapters\CNabuRenderInterfaceAdapter;
+
+use nabu\render\interfaces\INabuRenderInterface;
+
+use nabu\render\managers\CNabuRenderPoolManager;
 
 /**
  * Class to dump HTML rendered as PDF as HTTP response.
@@ -29,8 +35,11 @@ use nabu\provider\interfaces\INabuProviderInterface;
  * @version 0.0.1
  * @package \providers\nabu\pdf\renders
  */
-class CNabuPDFRenderInterface extends CNabuObject implements INabuProviderInterface
+class CNabuPDFRenderInterface extends CNabuRenderInterfaceAdapter implements INabuRenderInterface
 {
+    /** @var CNabuPDFRenderInterface PDF Render interface */
+    private $nb_pdf_render_interface = null;
+
     public function init()
     {
         return true;
@@ -40,4 +49,29 @@ class CNabuPDFRenderInterface extends CNabuObject implements INabuProviderInterf
     {
         return true;
     }
+
+    public function render()
+    {
+        $nb_engine = CNabuEngine::getEngine();
+
+        if (($nb_render_pool_manager = $nb_engine->getRenderPoolManager()) instanceof CNabuRenderPoolManager &&
+            ($nb_render_factory = $nb_render_pool_manager->getFactory('application/pdf')) instanceof CNabuRenderFactory
+        ) {
+            $nb_render_factory->buildStringAsHTTPResponse(
+<<< PDF
+<page stye="font-size: 14px;">
+    <h1>nabu-3 PDF Render test</h1>
+    <p>This is a test of PDF Render Provider module to verify performance.</p>
+</page>
+PDF
+                ,
+                array(
+                    'orientation' => 'P',
+                    'size' => 'A4',
+                    'language' => 'es'
+                )
+            );
+        }
+    }
+
 }

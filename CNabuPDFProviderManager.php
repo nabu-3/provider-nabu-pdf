@@ -52,6 +52,7 @@ class CNabuPDFProviderManager extends CNabuRenderModuleManagerAdapter
     {
         $nb_engine = CNabuEngine::getEngine();
 
+        /*
         $this->nb_pdf_render_descriptor = new CNabuRenderInterfaceDescriptor(
             $this,
             'NabuPDFRender',
@@ -61,7 +62,7 @@ class CNabuPDFProviderManager extends CNabuRenderModuleManagerAdapter
             'application/pdf'
         );
         $nb_engine->registerProviderInterface($this->nb_pdf_render_descriptor);
-
+        */
         $this->nb_pdf_render_transform_descriptor = new CNabuRenderTransformInterfaceDescriptor(
             $this,
             'NabuPDFRenderTransform',
@@ -77,6 +78,7 @@ class CNabuPDFProviderManager extends CNabuRenderModuleManagerAdapter
 
     public function registerApplication(INabuApplication $nb_application)
     {
+        /*
         if ($nb_application instanceof CNabuHTTPApplication) {
             $this->nb_application = $nb_application;
             $this->nb_application->registerRender(
@@ -85,6 +87,7 @@ class CNabuPDFProviderManager extends CNabuRenderModuleManagerAdapter
                     ->setClassName('providers\nabu\pdf\renders\CNabuPDFHTTPRender')
             );
         }
+        */
 
         return $this;
     }
